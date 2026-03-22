@@ -29,55 +29,57 @@ const ProductDetails = () => {
     const imageUrl = product.image ? (product.image.startsWith('http') ? product.image : `/${product.image}`) : 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?q=80&w=600&auto=format&fit=crop';
 
     return (
-        <div className="fade-in">
-            <button onClick={() => navigate(-1)} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
+        <div className="fade-in product-details-container">
+            <button onClick={() => navigate(-1)} className="btn btn-outline back-btn">
                 <ArrowLeft size={18} />
                 <span>Back</span>
             </button>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
-                <div style={{ borderRadius: 'var(--radius)', overflow: 'hidden', border: '1px solid var(--border)' }}>
-                    <img src={imageUrl} alt={product.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <div className="product-details-grid">
+                <div className="product-image-wrapper">
+                    <img src={imageUrl} alt={product.name} className="product-image" />
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <div>
-                        <span className="badge" style={{ background: '#e0f2fe', color: '#0369a1', marginRight: '0.5rem' }}>{product.category}</span>
-                        <span className="badge" style={{ background: '#f1f5f9', color: '#475569' }}>{product.brand}</span>
-                        <h1 style={{ fontSize: '2.5rem', margin: '0.5rem 0' }}>{product.name}</h1>
+                <div className="product-info-wrapper">
+                    <div className="product-header">
+                        <div className="product-badges">
+                            <span className="badge category-badge">{product.category}</span>
+                            <span className="badge brand-badge">{product.brand}</span>
+                        </div>
+                        <h1 className="product-name">{product.name}</h1>
                     </div>
 
-                    <p style={{ color: '#475569', fontSize: '1.125rem', lineHeight: '1.7', whiteSpace: 'pre-wrap' }}>
+                    <p className="product-description">
                         {product.description || "High-performance water purification system designed to provide safe, mineral-rich drinking water. Features multi-stage filtration for maximum purity."}
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: '#f8fafc', borderRadius: 'var(--radius)' }}>
-                            <ShieldCheck size={24} style={{ color: '#10b981' }} />
+                    <div className="product-stats-grid">
+                        <div className="stat-card">
+                            <ShieldCheck size={24} className="stat-icon-shield" />
                             <div>
-                                <p style={{ fontWeight: '700', fontSize: '0.875rem' }}>Warranty</p>
-                                <p style={{ fontSize: '0.75rem', color: '#64748b' }}>1 Year Standard</p>
+                                <p className="stat-label">Warranty</p>
+                                <p className="stat-value">1 Year Standard</p>
                             </div>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: '#f8fafc', borderRadius: 'var(--radius)' }}>
-                            <Zap size={24} style={{ color: '#f59e0b' }} />
+                        <div className="stat-card">
+                            <Zap size={24} className="stat-icon-zap" />
                             <div>
-                                <p style={{ fontWeight: '700', fontSize: '0.875rem' }}>Performance</p>
-                                <p style={{ fontSize: '0.75rem', color: '#64748b' }}>High Recovery</p>
+                                <p className="stat-label">Performance</p>
+                                <p className="stat-value">High Recovery</p>
                             </div>
                         </div>
                     </div>
 
-                    <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: product.stock > 0 ? '#10b981' : '#ef4444' }}>
+                    <div className="product-action-section">
+                        <div className={`stock-info ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
                             <Info size={18} />
-                            <span style={{ fontWeight: '600' }}>{product.stock > 0 ? `${product.stock} units available` : 'Currently out of stock'}</span>
+                            <span>{product.stock > 0 ? `${product.stock} units available` : 'Currently out of stock'}</span>
                         </div>
                         
                         <Link 
                             to={product.stock > 0 ? `/order/${product._id}` : '#'} 
-                            className={`btn btn-primary ${product.stock <= 0 ? 'disabled' : ''}`}
-                            style={{ width: '100%', padding: '1.25rem', fontSize: '1.125rem', pointerEvents: product.stock > 0 ? 'auto' : 'none', opacity: product.stock > 0 ? 1 : 0.6 }}
+                            className={`btn btn-primary order-btn ${product.stock <= 0 ? 'disabled' : ''}`}
+                            style={{ pointerEvents: product.stock > 0 ? 'auto' : 'none', opacity: product.stock > 0 ? 1 : 0.6 }}
                         >
                             <ShoppingCart size={22} />
                             <span>Order Now</span>

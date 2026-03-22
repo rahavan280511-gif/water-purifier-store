@@ -153,26 +153,28 @@ const AdminHistory = () => {
                                     )}
                                 </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1rem' }}>
-                                    <span style={{ 
-                                        padding: '0.4rem 0.8rem', 
-                                        borderRadius: '20px', 
-                                        background: '#f1f5f9', 
-                                        color: '#475569', 
-                                        fontSize: '0.75rem', 
-                                        fontWeight: 700,
-                                        textTransform: 'uppercase'
-                                    }}>
-                                        ID: {item._id.slice(-6)}
-                                    </span>
-                                    <button 
-                                        onClick={() => window.open(`https://wa.me/${item.phone}`, '_blank')}
-                                        className="btn btn-outline" 
-                                        style={{ color: '#10b981', borderColor: '#10b981', background: '#f0fdf4' }}
-                                    >
-                                        <Phone size={16} />
-                                        <span>Call Customer</span>
-                                    </button>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem', marginTop: '1rem', width: '100%' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+                                        <span style={{ 
+                                            padding: '0.4rem 0.8rem', 
+                                            borderRadius: '20px', 
+                                            background: '#f1f5f9', 
+                                            color: '#475569', 
+                                            fontSize: '0.75rem', 
+                                            fontWeight: 700,
+                                            textTransform: 'uppercase'
+                                        }}>
+                                            ID: {item._id.slice(-6)}
+                                        </span>
+                                        <button 
+                                            onClick={() => window.open(`https://wa.me/${item.phone}`, '_blank')}
+                                            className="btn btn-outline" 
+                                            style={{ color: '#10b981', borderColor: '#10b981', background: '#f0fdf4', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                                        >
+                                            <Phone size={16} />
+                                            <span>Call</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

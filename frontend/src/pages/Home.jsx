@@ -50,50 +50,38 @@ const Home = () => {
 
     return (
         <div className="fade-in">
-            <section style={{ marginBottom: '3rem', textAlign: 'center' }}>
-                <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Premium Water Purifiers</h1>
-                <p style={{ color: '#64748b', fontSize: '1.25rem' }}>Providing the purest drinking water for your home and office.</p>
+            <section className="hero-section">
+                <h1>Premium Water Purifiers</h1>
+                <p>Providing the purest drinking water for your home and office.</p>
             </section>
 
-            <div className="search-filters" style={{
-                display: 'flex',
-                gap: '1rem',
-                marginBottom: '2.5rem',
-                background: 'white',
-                padding: '1.5rem',
-                borderRadius: 'var(--radius)',
-                border: '1px solid var(--border)',
-                flexWrap: 'wrap',
-                alignItems: 'center'
-            }}>
-                <div style={{ position: 'relative', flex: '1', minWidth: '250px' }}>
-                    <Search style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} size={18} />
+            <div className="search-filters-container">
+                <div className="search-box">
+                    <Search className="search-icon" size={18} />
                     <input
                         type="text"
                         placeholder="Search products or brands..."
                         className="form-input"
-                        style={{ paddingLeft: '2.75rem' }}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <div className="category-tabs">
-                {['', 'RO Purifier', 'UV Purifier', 'Spare Part', 'Filter Cartridge'].map(cat => (
-                    <button
-                        key={cat}
-                        className={`category-tab ${category === cat ? 'active' : ''}`}
-                        onClick={() => setCategory(cat)}
-                    >
-                        {cat === '' ? 'All Products' : cat}
-                    </button>
-                ))}
-            </div>
+                <div className="filter-controls">
+                    <div className="category-tabs">
+                        {['', 'RO Purifier', 'UV Purifier', 'Spare Part', 'Filter Cartridge'].map(cat => (
+                            <button
+                                key={cat}
+                                className={`category-tab ${category === cat ? 'active' : ''}`}
+                                onClick={() => setCategory(cat)}
+                            >
+                                {cat === '' ? 'All Products' : cat}
+                            </button>
+                        ))}
+                    </div>
 
                     <select
-                        className="form-input"
-                        style={{ width: '160px' }}
+                        className="form-input brand-select"
                         value={brand}
                         onChange={(e) => setBrand(e.target.value)}
                     >
