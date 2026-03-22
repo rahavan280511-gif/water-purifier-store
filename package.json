@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
+  },
+  "dependencies": {
+    "multer": "^2.1.1",
+    "pdf-parse": "^2.4.5"
+  }
+}

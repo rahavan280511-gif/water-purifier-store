@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+dist/
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+server.log
+
+# IDEs
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# OS
+backend/uploads/*
+!backend/uploads/.gitkeep
