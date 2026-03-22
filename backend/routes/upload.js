@@ -4,10 +4,18 @@ const pdfParse = require("pdf-parse");
 const fs = require("fs");
 const path = require("path");
 const { auth, admin } = require("../middleware/auth");
+const cloudinary = require('cloudinary').v2;
 
 const router = express.Router();
 
-// Configure storage for multer
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Configure temporary local storage for multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // Ensure the uploads directory exists
@@ -32,12 +40,21 @@ router.post("/upload", admin, upload.fields([{ name: "image", maxCount: 1 }, { n
             return res.status(400).json({ error: "Upload failed: No file data received. Check field names and form-data." });
         }
 
-        // Handle Image Upload
+        // Handle Image Upload with Cloudinary
         if (req.files.image && req.files.image.length > 0) {
             const file = req.files.image[0];
+            
+            // Upload the file to Cloudinary
+            const result = await cloudinary.uploader.upload(file.path, {
+                folder: 'water-purifier-store'
+            });
+            
+            // Clean up the local file after upload
+            fs.unlinkSync(file.path);
+
             return res.json({
-                message: "Image uploaded successfully",
-                imageUrl: `uploads/${file.filename}`
+                message: "Image uploaded successfully to Cloudinary",
+                imageUrl: result.secure_url
             });
         }
 
